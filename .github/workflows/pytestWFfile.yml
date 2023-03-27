@@ -13,32 +13,35 @@ jobs:
       matrix:
         python-version: [3.9]
     steps:
-      - name: Checkout code
+      - name: コードをチェックアウトする
         uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
+
+      - name: Pythonをセットアップする ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Pipenv
+
+      - name: Pipenvをインストールする
         run: |
           python -m pip install --upgrade pip
           pip install pipenv
-      - name: Hello World
-        run: |
-          echo "Hello World !"
-      - name: Display Python version
+
+      - name: Pythonバージョンを確認のためコンソールに出力する
         run: python -c "import sys; print(sys.version)"
-      - name: Pip install
+
+      - name: 依存ファイルをPipfileからpipインストールする
         run: pipenv install --dev
-      - name: pytest
+
+      - name: pytestを実行する
         run: pipenv run pytest --html=data/index.html
-        if: always()
-      - name: Upload HTML report
+
+      - name: Pytestのレポートを保存する
         uses: actions/upload-artifact@v2
         with:
           name: html-report
           path: data/**
-      - name: Page upload
+
+      - name: 結果表示ページを保存する
         uses: actions/upload-pages-artifact@v1
         with:
           path: data
