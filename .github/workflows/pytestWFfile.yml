@@ -13,11 +13,19 @@ jobs:
       matrix:
         python-version: [3.9]
     steps:
-      - name: コードをチェックアウトする
-        uses: actions/checkout@v3
+      - name: チェックアウト
+        uses: actions/checkout@v2
+
+      - name: キャッシュを復元
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/Pipfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Pythonをセットアップする ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -26,7 +34,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pipenv
 
-      - name: Pythonバージョンを確認のためコンソールに出力する
+      - name: Pythonバージョンを確認する
         run: python -c "import sys; print(sys.version)"
 
       - name: 依存ファイルをPipfileからpipインストールする
@@ -35,7 +43,7 @@ jobs:
       - name: pytestを実行する
         run: pipenv run pytest --html=data/index.html
 
-      - name: Pytestのレポートを保存する
+      - name: レポートを保存する
         uses: actions/upload-artifact@v2
         with:
           name: html-report
