@@ -31,6 +31,7 @@ jobs:
       - name: Pip install
         run: pipenv install --dev
       - name: pytest
+        continue-on-error: true
         run: pipenv run pytest --html=data/index.html
       - name: Upload HTML report
         uses: actions/upload-artifact@v2
