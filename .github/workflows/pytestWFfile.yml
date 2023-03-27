@@ -1,0 +1,36 @@
+name: "Pytest WF"
+
+on: [push]
+
+jobs:
+  sample:
+    name: Pytest WF Job
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Pipenv
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+      - name: Hello World
+        run: |
+          echo "Hello World !"
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Pip install
+        run: pipenv install --dev
+      - name: pytest
+        run: pipenv run pytest --html=html/test-results.html
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v2
+        with:
+          name: html-report
+          path: html/**

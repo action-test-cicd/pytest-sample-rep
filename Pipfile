@@ -1,0 +1,36 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+# boto3 = "*"
+
+[dev-packages]
+pytest = "*"
+# pytest-cov = "*"
+# boto3 = "*"
+# pyyaml = "*"
+# jsonschema = "*"
+# awsiotsdk = "*"
+# moto = "*"
+# jsondiff = "*"
+# ipykernel = "*"
+pytest-html = "*"
+# flake8 = "*"
+# autopep8 = "*"
+# pandas = "*"
+# numpy = "*"
+# sphinx = "*"
+# pytest-mock = "*"
+# mocker = "*"
+# freezegun = "*"
+# pypng = "*"
+# pyqrcode = "*"
+# aws-lambda-powertools = "*"
+# openpyxl = "*"
+# pyarrow = "*"
+# awswrangler = "*"
+
+[requires]
+python_version = "3.9"
