@@ -45,6 +45,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: data
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -55,5 +56,6 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - uses: actions/deploy-pages@v1
+      - name: Pagesのデプロイ
+        uses: actions/deploy-pages@v1
         id: deployment
