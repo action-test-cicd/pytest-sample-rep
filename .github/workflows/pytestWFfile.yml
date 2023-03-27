@@ -41,7 +41,7 @@ jobs:
         run: pipenv install --dev
 
       - name: pytestを実行する
-        run: pipenv run pytest --html=data/Result/pytestResults.html
+        run: pipenv run pytest --html=data/Results/pytestResults.html
 
       - name: index.htmlを作成する
         run: |
@@ -56,7 +56,7 @@ jobs:
       - name: 結果表示ページを保存する
         uses: actions/upload-pages-artifact@v1
         with:
-          path: data/**
+          path: data
 
   deploy:
     needs: build
