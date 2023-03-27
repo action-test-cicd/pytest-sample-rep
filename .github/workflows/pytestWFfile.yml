@@ -31,9 +31,10 @@ jobs:
       - name: Pip install
         run: pipenv install --dev
       - name: pytest
-        continue-on-error: true
+        # continue-on-error: true
         run: pipenv run pytest --html=data/index.html
       - name: Upload HTML report
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: html-report
@@ -45,6 +46,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    if: always()
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
