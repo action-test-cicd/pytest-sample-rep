@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  sample:
+  build:
     name: Pytest WF Job
     runs-on: ubuntu-latest
     strategy:
