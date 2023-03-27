@@ -56,7 +56,7 @@ jobs:
       - name: 結果表示ページを保存する
         uses: actions/upload-pages-artifact@v1
         with:
-          path: data
+          path: data/**
 
   deploy:
     needs: build
