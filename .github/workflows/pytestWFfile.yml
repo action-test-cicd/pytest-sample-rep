@@ -31,9 +31,25 @@ jobs:
       - name: Pip install
         run: pipenv install --dev
       - name: pytest
-        run: pipenv run pytest --html=html/test-results.html
+        run: pipenv run pytest --html=data/index.html
       - name: Upload HTML report
         uses: actions/upload-artifact@v2
         with:
           name: html-report
-          path: html/**
+          path: data/**
+      - name: Page upload
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: data
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/deploy-pages@v1
+        id: deployment
