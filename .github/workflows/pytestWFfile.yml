@@ -1,6 +1,9 @@
 name: "Pytest WF"
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   sample:
