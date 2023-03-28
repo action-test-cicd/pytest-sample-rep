@@ -13,7 +13,7 @@ jobs:
       matrix:
         python-version: [3.9]
     env:
-      REPO_NAME: ${{ github.repository | split("/") | last | trim }}
+      REPO_NAME: ${{ github.repository.split("/").last | trim }}
     steps:
       - name: チェックアウト
         uses: actions/checkout@v2
